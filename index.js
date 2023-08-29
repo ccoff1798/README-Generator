@@ -1,43 +1,90 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-// TODO: Create an array of questions for user input
-const questions = ['Enter Project Title', 'Enter Description', 'Enter Intallation Instructions','Pick License','Enter Usage Instructions', 'Enter Contributings', 'Enter Tests'];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// Questions for user input
+const questions = [
+  {
+    type: 'input',
+    name: 'Title',
+    message: 'Enter Project Title'
+  },
+  {
+    type: 'input',
+    name: 'Description',
+    message: 'Enter Description'
+  },
+  {
+    type: 'input',
+    name: 'Install',
+    message: 'Enter Installation Instructions'
+  },
+  {
+    type: 'list',
+    name: 'License',
+    message: 'Pick License',
+    choices: ['MIT', 'GPL', 'Apache', 'None']  // Add more licenses as needed
+  },
+  {
+    type: 'input',
+    name: 'Usage',
+    message: 'Enter Usage Instructions'
+  },
+  {
+    type: 'input',
+    name: 'Contributings',
+    message: 'Enter Contributings'
+  },
+  {
+    type: 'input',
+    name: 'Tests',
+    message: 'Enter Tests'
+  }
+];
 
-// TODO: Create a function to initialize app
-function init() {}
+// Function to write README file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, JSON.stringify(data, null, '/n'), (err) => {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('File written successfully!');
+        }
+    });
+}
 
-// Function call to initialize app
+// Function to initialize app
+async function init() {
+    try {
+        const answers = await inquirer.prompt(questions);
+        
+        // TODO: Format the answers and structure your README content as needed
+        const readmeContent = `
+# ${answers.Title}
+
+## Description
+${answers.Description}
+
+## Installation
+${answers.Install}
+
+## License
+${answers.License}
+
+## Usage
+${answers.Usage}
+
+## Contributings
+${answers.Contributings}
+
+## Tests
+${answers.Tests}
+`;
+
+        writeToFile("README.md", readmeContent);
+    } catch (error) {
+        console.error("Error while collecting inputs:", error);
+    }
+}
+
+// Call function to initialize app
 init();
-
-//Inquierer Prompts
-inquirer
-  .prompt([
-    {
-      type: 'input',
-      name: 'Title',
-      message: questions[0],
-    },
-    {
-        type: 'input',
-        name: 'Description',
-        message: questions[1],
-      },
-      {
-        type: 'input',
-        name: 'Install',
-        message: questions[2],
-      },
-  ])
-
-  //This is residual from the code
-//   .then((data) => {
-//     const filename = `${data.name.toLowerCase().split(' ').join('')}.json`;
-
-//     fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) =>
-//       err ? console.log(err) : console.log('Success!')
-//     );
-//   });
