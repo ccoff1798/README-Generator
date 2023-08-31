@@ -17,4 +17,4 @@ To use, simply run node index.js and answer the appropriate prompts
 This program was made possible due to the starter information we were given to work with, along with a majority of the code produces by me
 
 ## Tests
-Entering Link to test here
+[Link to Test video](https://youtu.be/WJZrQWjMgZA)

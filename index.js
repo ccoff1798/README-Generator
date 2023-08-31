@@ -22,7 +22,7 @@ const questions = [
     type: 'list',
     name: 'License',
     message: 'Pick License',
-    choices: ['MIT', 'GPL', 'Apache', 'None']  // Add more licenses as needed
+    choices: ['MIT', 'GPL', 'Apache', 'None']
   },
   {
     type: 'input',
@@ -80,7 +80,7 @@ ${answers.Contributings}
 ${answers.Tests}
 `;
 
-        writeToFile("README.md", readmeContent);
+        writeToFile("GeneratedREADME.md", readmeContent);
     } catch (error) {
         console.error("Error while collecting inputs:", error);
     }
