@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // Questions for user input
 const questions = [
@@ -38,7 +39,8 @@ const questions = [
     type: 'input',
     name: 'Tests',
     message: 'Enter Tests'
-  }
+  },
+  
 ];
 
 // Function to write README file
@@ -60,6 +62,15 @@ async function init() {
         // TODO: Format the answers and structure your README content as needed
         const readmeContent = `
 # ${answers.Title}
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [License](#license)
+- [Usage](#usage)
+- [Contributings](#contributings)
+- [Tests](#tests)
+
+${generateMarkdown.renderLicenseBadge(answers.License)}
 
 ## Description
 ${answers.Description}
@@ -67,8 +78,7 @@ ${answers.Description}
 ## Installation
 ${answers.Install}
 
-## License
-${answers.License}
+${generateMarkdown.renderLicenseSection(answers.License)}
 
 ## Usage
 ${answers.Usage}
